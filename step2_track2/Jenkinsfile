@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS = 'DockerHub'
+        DOCKERHUB_CREDENTIALS = 'dockerhub-credentials'
         DOCKER_REGISTRY = 'localhost:5000'
         IMAGE_NAME = 'flask-app-example'
     }
