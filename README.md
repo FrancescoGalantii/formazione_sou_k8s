@@ -29,6 +29,7 @@ Lo stage('Build Docker Image'), questo stage costruisce l'immagine docker usando
     } catch (Exception e) {
        error "Docker build failed: ${e.message}"
 6)stage(docker push), pusha l' immagine, anche in questo caso ho aggiunto un blocco try-cache
+
 7)il post finale invece permette di eseguire delle operazioni in questo caso una pulizia della workstation
 
     post {
