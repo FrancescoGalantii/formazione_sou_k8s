@@ -4,7 +4,6 @@ pipeline {
         DOCKERHUB_CREDENTIALS = 'dockerhub-credentials'
         DOCKER_REGISTRY = 'localhost:5000'
         IMAGE_NAME = "francescogalanti/flask-app-example"
-        TAG = "latest"
     }
     stages {
         stage('Checkout') {
