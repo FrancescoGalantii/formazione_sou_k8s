@@ -4,7 +4,6 @@ pipeline {
         DOCKERHUB_CREDENTIALS = 'dockerhub-credentials'
         DOCKER_REGISTRY = 'localhost:5000'
         IMAGE_NAME = "francescogalanti/flask-app-example"
-        dockerImage = ''
     }
     stages {
         stage('Checkout') {
@@ -15,8 +14,8 @@ pipeline {
         stage('Set Docker Image Tag') {
             steps {
                 script {
-                    def branch = env.GIT_BRANCH ?: 'main'
-                    def sha = env.GIT_COMMIT.take(7) ?: 'unknown'
+                    def branch = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+                    def sha = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
                     def tag = 'latest'
 
                     if (branch == 'main') {
@@ -33,7 +32,11 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
+                    try {
+                        docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
+                    } catch (Exception e) {
+                        error "Docker build failed: ${e.message}"
+                    }
                 }
             }
         }
@@ -41,9 +44,13 @@ pipeline {
             steps {
                 script {
                     if (env.DOCKERHUB_CREDENTIALS) {
-                        docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials') {
+                        docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
                             def image = docker.image("${IMAGE_NAME}:${IMAGE_TAG}")
-                            image.push()
+                            try {
+                                image.push()
+                            } catch (Exception e) {
+                                error "Docker push failed: ${e.message}"
+                            }
                         }
                     } 
                 }
@@ -56,3 +63,4 @@ pipeline {
         }
     }
 }
+
