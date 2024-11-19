@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script {
                     if (env.DOCKERHUB_CREDENTIALS) {
-                        docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
+                        docker.withRegistry('https://index.docker.io/v1/', dockerhub-credentials) {
                             def image = docker.image("${IMAGE_NAME}:${IMAGE_TAG}")
                             try {
                                 image.push()
