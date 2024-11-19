@@ -11,6 +11,7 @@ spiegazione variabili d'ambiente:
 -->DOCKERHUB_CREDENTIALS variabile di ambiente che identifica le credenziali dockeruhub
 -->DOCKER_REGISTRY, specifica l'indirizzo del registry locale di default localhost:5000
 -->IMAGE_NAME nome dell'immagine docker.
+
 7)checkout scm, permette di clonare il repository 
 8)stage('Set Docker Image Tag'), crea il tag dell'immagine docker:
 
@@ -20,7 +21,8 @@ spiegazione variabili d'ambiente:
     --> che ottiene i primi 7 caratteri dell' hash del commit attuale
     def tag = 'latest'
     --> variabile locale usata per costruire il tag dell' immagine docker
-10)stage('Build Docker Image'), questo stage costruisce l'immagine docker usando la funzione docker.build() messa a disposizione dal plugin Docker di jenkins che ho installato manualmente dalla dashboard
+    
+Lo stage('Build Docker Image'), questo stage costruisce l'immagine docker usando la funzione docker.build() messa a disposizione dal plugin Docker di jenkins che ho installato manualmente dalla dashboard
 --> in questo stage e nel successivo ho aggiunto il blocco try-cache per avere un output più chiaro e capire dove si trova l'errore
 
     } catch (Exception e) {
