@@ -12,8 +12,9 @@ spiegazione variabili d'ambiente:
 -->DOCKER_REGISTRY, specifica l'indirizzo del registry locale di default localhost:5000
 -->IMAGE_NAME nome dell'immagine docker.
 
-7)checkout scm, permette di clonare il repository 
-8)stage('Set Docker Image Tag'), crea il tag dell'immagine docker:
+4)checkout scm, permette di clonare il repository 
+
+5)stage('Set Docker Image Tag'), crea il tag dell'immagine docker:
 
     def branch = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim() 
     --> permette di ottenere il branch corrente salvando l'output nella variabile branch e rimuovendo spazi o altro con          trim in modo da avere solo il branch nell'output
@@ -27,8 +28,8 @@ Lo stage('Build Docker Image'), questo stage costruisce l'immagine docker usando
 
     } catch (Exception e) {
        error "Docker build failed: ${e.message}"
-11)stage(docker push), pusha l' immagine, anche in questo caso ho aggiunto un blocco try-cache
-12)il post finale invece permette di eseguire delle operazioni in questo caso una pulizia della workstation
+6)stage(docker push), pusha l' immagine, anche in questo caso ho aggiunto un blocco try-cache
+7)il post finale invece permette di eseguire delle operazioni in questo caso una pulizia della workstation
 
     post {
         always {
