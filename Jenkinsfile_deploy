@@ -16,17 +16,6 @@ pipeline {
             }
         }
 
-        stage('Configurazione Helm') {
-            steps {
-                script {
-                    echo 'Configurazione del namespace su Kubernetes...'
-                    sh '''
-                        kubectl get namespace ${NAMESPACE} || kubectl create namespace ${NAMESPACE}
-                    '''
-                }
-            }
-        }
-
         stage('Installazione Helm') {
             steps {
                 echo 'Installazione della Helm Chart...'
