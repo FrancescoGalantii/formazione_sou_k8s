@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        GIT_REPO_URL = ‘https://github.com/FrancescoGalantii/formazione_sou.git’
         GIT_BRANCH = 'main'  
         CHART_NAME = 'flask-app’ 
         RELEASE_NAME = 'formazione-sou-release' 
