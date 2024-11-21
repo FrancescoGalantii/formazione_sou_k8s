@@ -12,11 +12,7 @@ pipeline {
     stages {
         stage('Clonare repository') {
             steps {
-               try {
-                   git branch: "${GIT_BRANCH}", url: "${GIT_REPO_URL}"
-               } catch (Exception e) {
-                   error "cloning repo failed: ${e.message}"
-               }
+                git branch: "${GIT_BRANCH}", url: "${GIT_REPO_URL}"
             }
         }
     }
@@ -24,26 +20,18 @@ pipeline {
     stage('Configurazione Helm') {
         steps {
             script {
-                try {
-                    sh '''
-                    kubectl get namespace ${NAMESPACE} || kubectl create namespace ${NAMESPACE}
-                    '''
-                } catch (Exception e) {
-                        error "configuring helm failed :${e.message}"
-                }
+                sh '''
+                kubectl get namespace ${NAMESPACE} || kubectl create namespace ${NAMESPACE}
+                '''
             }
         }
     }
 
     stage('Installazione Helm') {
         steps {
-            try {
-                sh '''
-                helm upgrade --install ${RELEASE_NAME} ./ --namespace ${NAMESPACE}
-                '''
-            } catch (Exception e) {
-                error "helm install failed :${e.message}"
-            }
+            sh '''
+            helm upgrade --install ${RELEASE_NAME} ./ --namespace ${NAMESPACE}
+            '''
         }
     }
     post {
