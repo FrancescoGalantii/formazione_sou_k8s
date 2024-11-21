@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GIT_REPO_URL = ‘https://github.com/FrancescoGalantii/formazione_sou.git’
+        GIT_REPO_URL = ‘git@github.com:FrancescoGalantii/formazione_sou_k8s.git’
         GIT_BRANCH = 'main'  
         CHART_PATH = 'formazione_sou/charts’ 
         RELEASE_NAME = 'formazione-sou-release' 
