@@ -16,6 +16,7 @@ pipeline {
                     git branch: "${GIT_BRANCH}", url: "${GIT_REPO_URL}"
                 } catch (Exception e) {
                     error "cloning repo failed: ${e.message}"
+                }
             }
         }
 
@@ -28,6 +29,7 @@ pipeline {
                         '''
                     } catch (Exception e) {
                         error "configuring helm failed :${e.message}"
+                    }
                 }
             }
         }
@@ -40,6 +42,7 @@ pipeline {
                     '''
                 } catch (Exception e) {
                     error "helm install failed :${e.message}"
+                }
             }
         }
     }
