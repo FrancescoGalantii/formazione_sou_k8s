@@ -12,13 +12,14 @@ pipeline {
     stages {
         stage('Clonare repository') {
             steps {
-                git branch: "${GIT_BRANCH}", url: "${GIT_REPO_URL}"
+                checkout scm
             }
         }
 
         stage('Installazione Helm') {
             steps {
                 sh '''
+                #!bin/bash
                 helm upgrade --install ${RELEASE_NAME} ./ --namespace ${NAMESPACE}
                 '''
             }
