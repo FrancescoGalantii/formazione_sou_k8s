@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Clonare repository') {
             steps {
-                Checkout scm 
+                git branch: "${GIT_BRANCH}", url: "${GIT_REPO_URL}"  
             }
         }
 
