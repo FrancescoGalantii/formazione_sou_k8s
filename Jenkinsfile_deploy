@@ -4,7 +4,7 @@ pipeline {
     environment {
         GIT_REPO_URL = ‘https://github.com/FrancescoGalantii/formazione_sou.git’
         GIT_BRANCH = 'main'  
-        CHART_NAME = 'flask-app’ 
+        CHART_PATH = 'formazione_sou/charts’ 
         RELEASE_NAME = 'formazione-sou-release' 
         NAMESPACE = 'formazione_sou'
     }
