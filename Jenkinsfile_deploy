@@ -19,6 +19,7 @@ pipeline {
                }
             }
         }
+    }
 
         stage('Configurazione Helm') {
             steps {
@@ -45,7 +46,6 @@ pipeline {
                }
             }
         }
-    }
 post {
         always {
             cleanWs()
