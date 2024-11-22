@@ -23,6 +23,7 @@ pipeline {
                    sh '''
                        export KUBECONFIG=/var/jenkins_home/.kube/config
                        kubectl config set-credentials jenkins --token=$K8S_TOKEN
+                       kubectl --server=http://192.168.2.243:8001 get nodes
                        helm upgrade --install ${RELEASE_NAME} ./ --namespace ${NAMESPACE}
                    '''
                 }
