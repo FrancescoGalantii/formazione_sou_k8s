@@ -6,7 +6,7 @@ pipeline {
         GIT_BRANCH = "main"
         CHART_NAME = "flask-app"
         RELEASE_NAME = "formazione-sou-release" 
-        NAMESPACE = "formazione_sou"
+        NAMESPACE = "formazione-sou"
     }
 
     stages {
