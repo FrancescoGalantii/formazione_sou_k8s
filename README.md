@@ -1,6 +1,8 @@
 # spiegazione del jenkinsfile passo passo
 1)pipeline {} definisce i vari blocchi di configurazione: agent, environment, stages, post.
+
 2)agent any specifica che questa pipeline può essere eseguita su qualsiasi nodo disponibile in jenkins.
+
 3)environment {..} definisce le variabili d'ambiente globali usate nella pipeline accessibili in tutte le stages.
 
     environment {
@@ -8,8 +10,11 @@
         DOCKER_REGISTRY = 'localhost:5000'
         IMAGE_NAME = "francescogalanti/flask-app-example"
 spiegazione variabili d'ambiente:
+
 -->DOCKERHUB_CREDENTIALS variabile di ambiente che identifica le credenziali dockeruhub
+
 -->DOCKER_REGISTRY, specifica l'indirizzo del registry locale di default localhost:5000
+
 -->IMAGE_NAME nome dell'immagine docker.
 
 4)checkout scm, permette di clonare il repository 
@@ -24,6 +29,7 @@ spiegazione variabili d'ambiente:
     --> variabile locale usata per costruire il tag dell' immagine docker
     
 Lo stage('Build Docker Image'), questo stage costruisce l'immagine docker usando la funzione docker.build() messa a disposizione dal plugin Docker di jenkins che ho installato manualmente dalla dashboard
+
 --> in questo stage e nel successivo ho aggiunto il blocco try-cache per avere un output più chiaro e capire dove si trova l'errore
 
     } catch (Exception e) {
