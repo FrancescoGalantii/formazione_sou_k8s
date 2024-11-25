@@ -11,11 +11,11 @@
         IMAGE_NAME = "francescogalanti/flask-app-example"
 spiegazione variabili d'ambiente:
 
--->DOCKERHUB_CREDENTIALS variabile di ambiente che identifica le credenziali dockeruhub
+- DOCKERHUB_CREDENTIALS variabile di ambiente che identifica le credenziali dockeruhub
 
--->DOCKER_REGISTRY, specifica l'indirizzo del registry locale di default localhost:5000
+- DOCKER_REGISTRY, specifica l'indirizzo del registry locale di default localhost:5000
 
--->IMAGE_NAME nome dell'immagine docker.
+- IMAGE_NAME nome dell'immagine docker.
 
 4)checkout scm, permette di clonare il repository 
 
