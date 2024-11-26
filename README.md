@@ -65,22 +65,7 @@ Nel primo stage sono andato semplicemente a clonare il repository passandogli br
 Nel secondo stage invece ho esportato il KUBECONFIG passandogli il path del container
 
     export KUBECONFIG=/var/jenkins_home/.kube/config
-Ho poi utilizzato il token creato successivamente alla creazione di un service account che ho sfruttato per far si che jenkins riuscisse a comunicare con il cluster minikube che di default isola tutto localmente.
+Successivamente ho eseguito l'helm install 
 
-Ho proceduto alla creazione del service account con kubectl e con namespace formazione-sou creato in precedenza
-
-    kubectl create serviceaccount jenkins-sa -n formazione-sou
-ho poi creato autonomamente il secret poiche le ultime versioni di kubernetes non lo creano più in automatico alla creazione del serviceaccount 
-
-    kubectl create secret generic jenkins-sa-token \
-    --namespace formazione-sou \
-    --type kubernetes.io/service-account-token \
-    --from-literal=extra=extra \
-    --dry-run=client -o yaml | \
-    kubectl annotate --local -f - kubernetes.io/service-account.name=jenkins-sa -o yaml | \
-    kubectl apply -f -
-per poi estrarlo con il seguente comando 
-
-    kubectl get secret jenkins-sa-token -n formazione-sou -o yaml
-# come usare il token?
-una volta creato il service account e dopo aver estratto il token bisogna andare sulla dashboard di jenkins e aggiungerlo come nuova credenziale.
+    helm upgrade --install flask-app-example charts --namespace ${NAMESPACE} --set image.tag=latest
+dove ho passato nome dell'applicazione, il percorso del charts, il namespace richiamando la variabile d'ambiente definita in precedenza e assegnandogli il tag latest poichè situata sul branch main.
