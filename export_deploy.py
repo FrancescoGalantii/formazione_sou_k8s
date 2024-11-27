@@ -2,7 +2,7 @@ import subprocess
 import yaml
 import sys
 
-def get_deployment_yaml(flask-app-example-deployment, formazione-sou):
+def get_deployment_yaml("flask-app-example-deployment", "formazione-sou"):
     try:
         result = subprocess.run(
             ["kubectl", "get", "deployment", "flask-app-example-deployment", "-n", "formazione-sou", "-o", "yaml"],
