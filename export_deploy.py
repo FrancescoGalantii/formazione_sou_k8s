@@ -1,5 +1,5 @@
 import subprocess
-#import yaml
+import yaml
 import sys
 
 def get_deployment_yaml(deployment_name, namespace):
