@@ -5,7 +5,7 @@ import sys
 def get_deployment_yaml(deployment_name, namespace):
     try:
         result = subprocess.run(
-            ["kubectl", "get", "deployment", "flask-app-example-deployment", "-n", "formazione-sou", "-o", "yaml"],
+            ["kubectl", "get", "deployment", deployment_name, "-n", namespace, "-o", "yaml"],
             check=True,
             capture_output=True,
             text=True
@@ -49,7 +49,7 @@ def main():
     namespace = "formazione-sou"
     
     print(f"Eseguo l'export del Deployment '{flask-app-example-deployment}' nel namespace '{formazione-sou}'...")
-    deployment_yaml = get_deployment_yaml(flask-app-example, formazione-sou)
+    deployment_yaml = get_deployment_yaml(deployment_name, namespace)
     
     print("Verifico la presenza di livenessProbe, readinessProbe, limits e requests...")
     check_probes_and_resources(deployment_yaml)
