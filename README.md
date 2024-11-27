@@ -47,7 +47,7 @@ Lo stage('Build Docker Image'), questo stage costruisce l'immagine docker usando
 # modifiche aggiuntive
 in seguito agli step precedenti ho aggiunto un nuovo jenkinsfile
 
-- Jenkinsfile_depoly
+- Jenkinsfile_deploy
 
 ho creato questa pipeline al fine di effettuare l' helm install sull'istanza k8s locale.
 # spiegazione Jenkinsfile_deploy 
@@ -77,3 +77,32 @@ dove ho passato:
 - il percorso del charts,
 - il namespace richiamando la variabile d'ambiente definita in precedenza ${NAMESPACE},
 - assegnandogli il tag latest poichè situata sul branch main.
+
+# spiegazione export_deploy.sh
+l'obiettivo di questo script era autenticarsi tramite serviceaccount cluster-reader ed eseguire l'export del deploy con un controllo che restituiva errore se non presenti all'interno del deployment:
+
+- livenessProbe, readinessProbe
+- limits, requests
+Alla fine dello script ho seguito questa struttura:
+
+      echo "Deployment esportato con successo in $EXPORT_FILE."
+      echo "------------------------------------------------------------------------------"
+      sleep 2
+      echo "il livenessProbe ha superato il controllo"
+      echo "------------------------------------------------------------------------------"
+      sleep 2
+      echo "il readinessProbe ha superato il controllo"
+      echo "------------------------------------------------------------------------------"
+      ...
+  al fine di migliorare la leggibilità dell'output ho inserito:
+
+  - degli echo contenenti "-------" per separare ogni singolo output
+  - degli sleep di due secondi tra un output e l'altro.
+  ho inoltre redirezionato il risultato dell'export in un file in questo modo
+
+        echo "$DEPLOYMENT_YAML" > "$EXPORT_FILE"
+  superfluo magari per questo script ma utile in caso di script più complessi nel caso:
+
+  - si voglia tenere una copia del deployment locale e modificarla senza apportare cambiamenti all'originale.
+  
+  
