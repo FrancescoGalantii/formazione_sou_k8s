@@ -22,7 +22,7 @@ pipeline {
                    sh '''
                        export KUBECONFIG=/var/jenkins_home/.kube/config
                        helm upgrade --install flask-app-example charts --namespace ${NAMESPACE} --set image.tag=latest 
-                       helm upgrade --install flask-app-ingress --namespace ${NAMESPACE} --set controller.service.type=NodePort
+                       helm upgrade --install flask-app-ingress charts --namespace ${NAMESPACE} --set controller.service.type=NodePort
 
                    '''
             }
