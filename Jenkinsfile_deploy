@@ -21,7 +21,7 @@ pipeline {
                 echo 'Installazione della Helm Chart...'
                    sh '''
                        export KUBECONFIG=/var/jenkins_home/.kube/config
-                       helm upgrade --install flask-app-example charts --namespace ${NAMESPACE} --set image.tag=latest --set ingress.host=formazionesou.local
+                       helm upgrade --install flask-app-example charts --namespace ${NAMESPACE} --set image.tag=latest 
 
                    '''
             }
