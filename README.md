@@ -76,10 +76,10 @@ dove ho passato:
 - nome dell'applicazione,
 - il percorso del charts,
 - il namespace richiamando la variabile d'ambiente definita in precedenza ${NAMESPACE},
-- assegnandogli il tag latest poichè situata sul branch main.
+- il tag latest poichè situata sul branch main.
 
 # spiegazione export_deploy.sh
-l'obiettivo di questo script era autenticarsi tramite serviceaccount cluster-reader ed eseguire l'export del deploy con un controllo che restituiva errore se non presenti all'interno del deployment:
+l'obiettivo di questo script era autenticarsi tramite serviceaccount cluster-reader (creato all'interno del chart presente sulla repo https://github.com/FrancescoGalantii/formazione_sou.git) ed eseguire l'export del deploy con un controllo che restituiva errore se non presenti all'interno del deployment:
 
 - livenessProbe, readinessProbe
 - limits, requests
