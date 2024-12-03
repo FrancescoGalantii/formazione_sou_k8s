@@ -11,11 +11,11 @@
         IMAGE_NAME = "francescogalanti/flask-app-example"
 spiegazione variabili d'ambiente:
 
-- *`DOCKERHUB_CREDENTIALS`*; variabile di ambiente che identifica le credenziali dockeruhub
+- ***`DOCKERHUB_CREDENTIALS`***; variabile di ambiente che identifica le credenziali dockeruhub
 
-- *`DOCKER_REGISTRY`*; specifica l'indirizzo del registry locale di default localhost:5000
+- ***`DOCKER_REGISTRY`***; specifica l'indirizzo del registry locale di default localhost:5000
 
-- *`IMAGE_NAME`*; nome dell'immagine docker.
+- ***`IMAGE_NAME`***; nome dell'immagine docker.
 
 4)checkout scm, permette di clonare il repository 
 
@@ -54,13 +54,14 @@ Lo `stage('Build Docker Image')`, questo stage costruisce l'immagine docker usan
         }
     }
 
-###`modifiche aggiuntive`###
+***`modifiche aggiuntive`***
+
 in seguito agli step precedenti ho aggiunto un nuovo jenkinsfile
 
 - Jenkinsfile_deploy
 
 ho creato questa pipeline al fine di effettuare l' helm install sull'istanza k8s locale.
-###`spiegazione Jenkinsfile_deploy`### 
+### *`spiegazione Jenkinsfile_deploy`*
 spiegazione variabili d'ambiente:
 
 - `GIT_REPO_URL`; identifica l'url del repository contentente il chart versionato
@@ -69,7 +70,7 @@ spiegazione variabili d'ambiente:
 - `RELEASE_NAME`; identifica le release creata
 - `NAMESPACE`; specifica il namespace sul quale devo effettuare l'helm install
 
-###`spiegazione stages`###
+### *`spiegazione stages`*
 Nel primo stage sono andato semplicemente a clonare il repository passandogli branch e url richiamando le variabili d'ambiente.
 
 - "${GIT_BRANCH}"
@@ -88,7 +89,7 @@ dove ho passato:
   - *`il namespace`* richiamando la variabile d'ambiente definita in precedenza ${NAMESPACE},
   - *`il tag latest`* poichè situata sul branch main.
 
-###`spiegazione export_deploy.sh`###
+### *`spiegazione export_deploy.sh`*
 l'obiettivo di questo script era autenticarsi tramite serviceaccount cluster-reader (creato all'interno del chart presente sulla repo https://github.com/FrancescoGalantii/formazione_sou.git) ed eseguire l'export del deploy con un controllo che restituiva errore se non presenti all'interno del deployment:
 
   - *`livenessProbe, readinessProbe`*
